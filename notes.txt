@@ -1,0 +1,1 @@
+- Home logo+yazısına basıldığında sayfa gerçekten refresh oluyor mu ? oluyorsa neden sadece laptoplar çekiliyor.
