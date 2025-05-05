@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { clearCart } from '../store/cartSlice';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from '../context/ToastContext';
 import { ShoppingCart, LoaderCircle } from 'lucide-react';
 
 const Checkout = () => {
@@ -11,7 +10,6 @@ const Checkout = () => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { showToast } = useToast();
   const [processing, setProcessing] = useState(false);
 
   const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -21,7 +19,6 @@ const Checkout = () => {
     setTimeout(() => {
       dispatch(clearCart());
       setProcessing(false);
-      showToast('Siparişiniz başarıyla oluşturuldu!', 'success');
       navigate('/');
     }, 1500);
   };
@@ -29,20 +26,20 @@ const Checkout = () => {
   if (cart.length === 0) {
     return (
       <main className="container mx-auto py-8 px-4">
-        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><ShoppingCart size={24} /> Sepetiniz Boş</h2>
-        <p className="text-gray-600">Sepetinizde ürün yok. Alışverişe devam etmek için ana sayfaya dönebilirsiniz.</p>
+        <h2 className="text-2xl font-bold mb-4 flex items-center gap-2"><ShoppingCart size={24} /> Your Cart is Empty</h2>
+        <p className="text-gray-600">Your cart is empty. You can return to the home page to continue shopping.</p>
       </main>
     );
   }
 
   return (
     <main className="container mx-auto py-8 px-4 max-w-lg">
-      <h2 className="text-2xl font-bold mb-6 flex items-center gap-2"><ShoppingCart size={24} /> Siparişi Tamamla</h2>
+      <h2 className="text-2xl font-bold mb-6 flex items-center gap-2"><ShoppingCart size={24} /> Complete Order</h2>
       {!isAuthenticated && (
-        <div className="mb-4 text-red-600">Sipariş verebilmek için giriş yapmalısınız.</div>
+        <div className="mb-4 text-red-600">You need to login to place an order.</div>
       )}
       <div className="mb-6 bg-gray-50 rounded p-4 border">
-        <h3 className="font-semibold mb-2">Sepet Özeti</h3>
+        <h3 className="font-semibold mb-2">Cart Summary</h3>
         <ul className="mb-2 divide-y">
           {cart.map(item => (
             <li key={item.id} className="py-2 flex justify-between">

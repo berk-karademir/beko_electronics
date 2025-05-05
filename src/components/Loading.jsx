@@ -1,7 +1,7 @@
 export default function Loading({ className = '', children }) {
   return (
     <div className={`text-center py-8 ${className}`}>
-      {children || 'Yükleniyor...'}
+      {children || 'Loading...'}
     </div>
   );
 }

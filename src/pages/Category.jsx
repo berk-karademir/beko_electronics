@@ -20,16 +20,18 @@ const Category = () => {
 
   return (
     <main className="container mx-auto py-8 px-4">
-      <h2 className="text-2xl font-bold mb-4">Kategori: {slug}</h2>
+      <h2 className="text-2xl font-bold mb-4">Category: {slug}</h2>
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map(product => (
-          <div key={product.id} className="border border-gray-100 rounded-lg p-4 bg-white shadow hover:shadow-lg transition">
-            <ImageSlider images={product.images} imgClassName="max-h-96 object-contain" />
-            <h3 className="font-semibold text-lg mt-5">{product.title}</h3>
-            <p className="text-gray-600 mb-2">{product.brand}</p>
-            <p className="font-bold text-blue-700 mb-2">${product.price}</p>
-            <Link to={`/product/${product.id}`} className="inline-block mt-2 text-blue-600 hover:underline">Detay</Link>
-          </div>
+          <Link key={product.id} to={`/product/${product.id}`} className="text-black">
+            <div className="border border-gray-100 rounded-lg p-4 bg-gray-50 shadow hover:shadow-lg transition">
+              <ImageSlider images={product.images} imgClassName="max-h-96 object-contain" />
+              <h3 className="font-semibold text-lg mt-5">{product.title}</h3>
+              <p className="text-gray-600 mb-2">{product.brand}</p>
+              <p className="font-bold text-blue-700 mb-2">${product.price}</p>
+              <p className="text-blue-600 hover:underline">Details</p>
+            </div>
+          </Link>
         ))}
       </div>
     </main>

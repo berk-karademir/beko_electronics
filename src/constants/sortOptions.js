@@ -1,8 +1,8 @@
 export const SORT_OPTIONS = [
-  { value: 'rating-desc', label: 'En yüksek puan (↓)', heading: 'Puana göre sırala (Azalan)' },
-  { value: 'rating-asc', label: 'En düşük puan (↑)', heading: 'Puana göre sırala (Artan)' },
-  { value: 'reviews-desc', label: 'En çok yorum (↓)', heading: 'Yorum sayısına göre sırala (Azalan)' },
-  { value: 'reviews-asc', label: 'En az yorum (↑)', heading: 'Yorum sayısına göre sırala (Artan)' },
-  { value: 'price-desc', label: 'En yüksek fiyat (↓)', heading: 'Fiyata göre sırala (Azalan)' },
-  { value: 'price-asc', label: 'En düşük fiyat (↑)', heading: 'Fiyata göre sırala (Artan)' },
+  { value: 'rating-desc', label: 'Highest rating (↓)', heading: 'Sort by rating (Descending)' },
+  { value: 'rating-asc', label: 'Lowest rating (↑)', heading: 'Sort by rating (Ascending)' },
+  { value: 'reviews-desc', label: 'Most reviews (↓)', heading: 'Sort by review count (Descending)' },
+  { value: 'reviews-asc', label: 'Fewest reviews (↑)', heading: 'Sort by review count (Ascending)' },
+  { value: 'price-desc', label: 'Highest price (↓)', heading: 'Sort by price (Descending)' },
+  { value: 'price-asc', label: 'Lowest price (↑)', heading: 'Sort by price (Ascending)' },
 ];

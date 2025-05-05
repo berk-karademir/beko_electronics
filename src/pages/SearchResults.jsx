@@ -58,11 +58,11 @@ const SearchResults = () => {
 
   return (
     <main className="container mx-auto py-8 px-4">
-      <h2 className="text-2xl font-bold mb-4">Arama Sonuçları: <span className="text-blue-700">{searchTerm}</span></h2>
-      {loading && <p>Yükleniyor...</p>}
+      <h2 className="text-2xl font-bold mb-4">Search Results for: <span className="text-blue-700">{searchTerm}</span></h2>
+      {loading && <p>Loading...</p>}
       {error && <div className="text-red-600 mb-4">{error}</div>}
       {!loading && !error && results.length === 0 && (
-        <div className="text-gray-600">Sonuç bulunamadı.</div>
+        <div className="text-gray-600">No results found.</div>
       )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {results.map(product => (

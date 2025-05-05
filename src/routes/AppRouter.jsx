@@ -10,6 +10,7 @@ import SearchResults from '../pages/SearchResults';
 import Checkout from '../pages/Checkout';
 import NotFound from '../pages/NotFound';
 import Header from '../components/Header';
+import RegistrationSuccessfull from '../pages/RegistrationSuccessfull';
 
 const AppRouter = () => (
   <Router>
@@ -22,6 +23,7 @@ const AppRouter = () => (
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+      <Route path="/registration-successfull" element={<RegistrationSuccessfull />} />
       <Route path="/search" element={<SearchResults />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

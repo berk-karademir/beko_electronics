@@ -62,14 +62,13 @@ const ProductDetail = () => {
               className="bg-blue-700 text-white px-4 py-2 rounded mb-4 hover:bg-blue-800 transition"
               onClick={handleAddToCart}
             >
-              Sepete Ekle
+              Add to Cart
             </button>
-            
             <div className="text-gray-700 mb-4">{product.description}</div>
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold mb-2">Değerlendirmeler ({reviews.length}) ⭐ {product.rating} </h3>
-            {reviews.length === 0 && <div className="text-gray-500 mb-4">Henüz yorum yok.</div>}
+            <h3 className="text-lg font-semibold mb-2">Reviews ({reviews.length}) ⭐ {product.rating}</h3>
+            {reviews.length === 0 && <div className="text-gray-500 mb-4">No reviews yet.</div>}
             <ul className="mb-6 space-y-4">
               {reviews.map((rev, i) => (
                 <li key={i} className="border rounded p-3 bg-gray-100">
@@ -81,14 +80,14 @@ const ProductDetail = () => {
             </ul>
             {isAuthenticated && (
               <form onSubmit={handleReviewSubmit} className="mb-4">
-                <label className="block mb-1 font-medium">Yorumunuz</label>
+                <label className="block mb-1 font-medium">Your Review</label>
                 <textarea
                   className="border rounded w-full p-2 mb-2"
                   value={reviewInput}
                   onChange={e => setReviewInput(e.target.value)}
                   rows={3}
                 />
-                <label className="block mb-1 font-medium">Puanınız</label>
+                <label className="block mb-1 font-medium">Your Rating</label>
                 <select
                   className="border rounded w-full p-2 mb-2"
                   value={reviewRating}
@@ -98,7 +97,7 @@ const ProductDetail = () => {
                     <option key={val} value={val}>{val}</option>
                   ))}
                 </select>
-                <button type="submit" className="bg-blue-700 text-white px-4 py-2 rounded">Yorumu Gönder</button>
+                <button type="submit" className="bg-blue-700 text-white px-4 py-2 rounded">Send Review</button>
               </form>
             )}
           </div>

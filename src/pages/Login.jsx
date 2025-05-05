@@ -1,39 +1,51 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../store/userSlice';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { useToast } from '../context/ToastContext';
-import useForm from '../hooks/useForm';
 
 const Login = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, isAuthenticated } = useSelector(state => state.user);
-  const { showToast } = useToast();
-  const [form, handleChange, resetForm] = useForm({ username: '', password: '' });
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const result = await dispatch(loginUser(form));
-    if (loginUser.fulfilled.match(result)) {
-      showToast('Giriş başarılı!', 'success');
-      navigate('/');
-      resetForm();
-    } else {
-      showToast(result.payload || 'Giriş başarısız', 'error');
+  const onSubmit = async (data) => {
+    try {
+      const res = await fetch('https://workintech-fe-ecommerce.onrender.com/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: data.email,
+          password: data.password
+        })
+      });
+      const result = await res.json();
+      if (res.ok && result.token) {
+        // Beni hatırla seçiliyse localStorage, değilse sessionStorage
+        if (data.remember) {
+          localStorage.setItem('token', result.token);
+        } else {
+          sessionStorage.setItem('token', result.token);
+        }
+        setTimeout(() => navigate('/'), 1500);
+      } else {
+      }
+    } catch (err) {
     }
   };
 
   return (
     <main className="container mx-auto py-8 px-4 max-w-md">
-      <h2 className="text-2xl font-bold mb-4">Giriş Yap</h2>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <input name="username" value={form.username} onChange={handleChange} required placeholder="Kullanıcı Adı" className="border px-3 py-2 rounded" />
-        <input name="password" value={form.password} onChange={handleChange} type="password" required placeholder="Şifre" className="border px-3 py-2 rounded" />
-        <button type="submit" disabled={loading} className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">
-          {loading ? 'Giriş Yapılıyor...' : 'Giriş Yap'}
+      <h2 className="text-2xl font-bold mb-4">Login</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <input type="email" {...register('email', { required: 'Email is required.' })} placeholder="Email" className="border px-3 py-2 rounded" />
+        {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
+        <input type="password" {...register('password', { required: 'Password is required.' })} placeholder="Password" className="border px-3 py-2 rounded" />
+        {errors.password && <span className="text-red-600 text-sm">{errors.password.message}</span>}
+        <label className="flex items-center gap-2">
+          <input type="checkbox" {...register('remember')} />
+          <span>Remember Me</span>
+        </label>
+        <button type="submit" disabled={isSubmitting} className="bg-blue-700 text-white px-4 py-2 rounded hover:bg-blue-800 transition">
+          {isSubmitting ? 'Logging In...' : 'Login'}
         </button>
-        {error && <div className="text-red-600 text-sm">{error}</div>}
       </form>
     </main>
   );
